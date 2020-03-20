@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SQ.Base;
 
 namespace akWXHelper
 {
@@ -14,20 +15,15 @@ namespace akWXHelper
     {
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                   .SetBasePath(Directory.GetCurrentDirectory())
-                   .AddJsonFile("hosting.json", true)
-                   .Build();
-            CreateHostBuilder(args, config).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args, IConfigurationRoot config) =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls(ConfigurationHelper.GetAppSetting("urls"));
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseConfiguration(config);
-                    
                 });
     }
 }
