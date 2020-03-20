@@ -1,0 +1,63 @@
+﻿@model ACL17
+@{
+    Layout = null;
+    string chk = "";
+    if (Model.enabled == "yes")
+    {
+        chk = "checked";
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <title>爱快控制</title>
+    <link rel="stylesheet" href="~/lib/weui/dist/style/weui.min.css" />
+    <link rel="stylesheet" href="~/lib/weui/dist/example/example.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        function dsChange() {
+            $('#loadingToast').show();
+            var state = 1;
+            if ($("#chkds").is(":checked") == true) {
+                state = 0;
+            }
+            $.post("/AK/ChangeAcl",
+                {
+                    "id": @Model.id,
+                    "state": state
+                },
+                    function (data) {
+                        $('#loadingToast').hide();
+                        if (data == 0) {
+                            $("#chkds").prop('checked', !$("#chkds").is(":checked"));
+                        }
+                    },
+                "json");
+        }
+
+    </script>
+</head>
+<body>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell weui-cell_active weui-cell_switch">
+            <div class="weui-cell__bd">AK控制(@Model.comment)</div>
+            <div class="weui-cell__ft">
+                <input id="chkds" class="weui-switch" type="checkbox" @chk onclick="dsChange()">
+            </div>
+        </div>
+    </div>
+
+
+    <div id="loadingToast" style="opacity: 0; display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">数据提交中</p>
+        </div>
+    </div>
+</body>
+</html>
