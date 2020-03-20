@@ -32,5 +32,5 @@
 ## 启动方法
 安装dotnet 3.1后，直接执行dotnet akWXHelper.dll  
 windows下可直接运行akWXHelper.exe  
-也可通过dotnetrun在docker中运行
+也可通过dotnetrun在docker中运行  
 启动后再网页中访问http://127.0.0.1:5010 即可测试
