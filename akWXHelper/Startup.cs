@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using akWXHelper.EF.WebApplication1.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +26,9 @@ namespace akWXHelper
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            string connecttext = SQ.Base.FileHelp.GetMyConfPath() + "db/ak.db";
+            services.AddDbContext<SqlContext>(options => options.UseSqlite(connecttext));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

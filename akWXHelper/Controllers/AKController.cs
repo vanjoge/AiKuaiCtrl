@@ -13,7 +13,7 @@ namespace akWXHelper.Controllers
         int aclId = Convert.ToInt32(ConfigurationHelper.GetAppSetting("aclId"));
         public IActionResult Index()
         {
-            var h = http.Acl_17_Get(aclId);
+            var h = http.Acl_l7_Get(aclId);
 
             return View(h);
         }
@@ -23,14 +23,14 @@ namespace akWXHelper.Controllers
 
             if (state == 0)
             {
-                if (http.Acl_17_Up(id))
+                if (http.Acl_l7_Up(id))
                 {
                     return 1;
                 }
             }
             else
             {
-                if (http.Acl_17_Down(id))
+                if (http.Acl_l7_Down(id))
                 {
                     return 1;
                 }

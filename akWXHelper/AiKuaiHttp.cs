@@ -42,10 +42,10 @@ namespace akWXHelper
             }
             return html;
         }
-        public ACL17 Acl_17_Get(int id)
+        public ACLl7 Acl_l7_Get(int id)
         {
             var html = MyPost(Url + "/Action/call", "{\"func_name\":\"acl_l7\",\"action\":\"show\",\"param\":{\"TYPE\":\"total,data\",\"limit\":\"0,20\",\"ORDER_BY\":\"\",\"ORDER\":\"\"}}");
-            var m = html.ParseJSON<RData<ACL17>>();
+            var m = html.ParseJSON<RData<ACLl7>>();
             if (m.Result == 30000 && m.Data != null && m.Data.data != null && m.Data.data.Count > 0)
             {
                 foreach (var item in m.Data.data)
@@ -58,17 +58,31 @@ namespace akWXHelper
             }
             return null;
         }
-        public bool Acl_17_Down(int id)
+        public bool Acl_l7_Down(int id)
         {
             var html = MyPost(Url + "/Action/call", "{\"func_name\":\"acl_l7\",\"action\":\"down\",\"param\":{\"id\":\"" + id + "\"}}");
             var m = html.ParseJSON<RModel>();
             return m.Result == 30000;
         }
-        public bool Acl_17_Up(int id)
+        public bool Acl_l7_Up(int id)
         {
             var html = MyPost(Url + "/Action/call", "{\"func_name\":\"acl_l7\",\"action\":\"up\",\"param\":{\"id\":\"" + id + "\"}}");
             var m = html.ParseJSON<RModel>();
             return m.Result == 30000;
+        }
+
+
+        public RDataList<MonitorLanip> monitor_lanip()
+        {
+            var html = MyPost(Url + "/Action/call", "{\"func_name\":\"monitor_lanip\",\"action\":\"show\",\"param\":{\"TYPE\":\"data,total\",\"ORDER_BY\":\"ip_addr_int\",\"orderType\":\"IP\",\"limit\":\"0,100\",\"ORDER\":\"\"}}");
+
+
+            var m = html.ParseJSON<RData<MonitorLanip>>();
+            if (m.Result == 30000)
+            {
+                return m.Data;
+            }
+            return null;
         }
     }
 }

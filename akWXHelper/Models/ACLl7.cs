@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace akWXHelper.Models
 {
-    public class ACL17
+    public class ACLl7
     {
         /// <summary>
         /// 
