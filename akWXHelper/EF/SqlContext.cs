@@ -17,6 +17,11 @@ namespace akWXHelper.EF
             }
             public DbSet<MonitorLanip> MonitorLanip { get; set; }
 
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                modelBuilder.Entity<MonitorLanip>().HasKey(t => new { t.GetTime, t.id });
+            }
+
         }
 
     }

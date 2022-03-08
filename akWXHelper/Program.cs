@@ -15,7 +15,15 @@ namespace akWXHelper
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            if (MyTask.Singleton.Start())
+            {
+                Console.WriteLine("启动成功");
+                CreateHostBuilder(args).Build().Run();
+            }
+            else
+            {
+                Console.WriteLine("启动失败，程序退出");
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

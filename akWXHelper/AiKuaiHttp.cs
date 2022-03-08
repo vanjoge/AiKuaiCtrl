@@ -22,25 +22,41 @@ namespace akWXHelper
         private string Url;
         public bool Login()
         {
-            var html = http.PostPage(Url + "/Action/login", "{\"username\":\"" + usr + "\",\"passwd\":\"" + pwd + "\",\"pass\":\"" + passH + "\",\"remember_password\":\"\"}");
-            var m = html.ParseJSON<RModel>();
-            //return html == "{\"Result\":10000,\"ErrMsg\":\"Succeess\"}";
-            return m.Result == 10000;
+            string html = null;
+            try
+            {
+                html = http.PostPage(Url + "/Action/login", "{\"username\":\"" + usr + "\",\"passwd\":\"" + pwd + "\",\"pass\":\"" + passH + "\",\"remember_password\":\"\"}");
+                var m = html.ParseJSON<RModel>();
+                //return html == "{\"Result\":10000,\"ErrMsg\":\"Succeess\"}";
+                return m.Result == 10000;
+            }
+            finally
+            {
+                SQ.Base.Log.WriteLog4(html);
+            }
 
         }
         public string MyPost(string url, string postData)
         {
-            var html = http.PostPage(url, postData);
-            var m = html.ParseJSON<RModel>();
-            //if (html == "{\"Result\":10014,\"ErrMsg\":\"no login authentication\"}")
-            if (m.Result == 10014)
+            string html = null;
+            try
             {
-                if (Login())
+                html = http.PostPage(url, postData);
+                var m = html.ParseJSON<RModel>();
+                //if (html == "{\"Result\":10014,\"ErrMsg\":\"no login authentication\"}")
+                if (m.Result == 10014)
                 {
-                    html = http.PostPage(url, postData);
+                    if (Login())
+                    {
+                        html = http.PostPage(url, postData);
+                    }
                 }
+                return html;
             }
-            return html;
+            finally
+            {
+                SQ.Base.Log.WriteLog4(html);
+            }
         }
         public ACLl7 Acl_l7_Get(int id)
         {

@@ -1,0 +1,173 @@
+﻿@model akWXHelper.Models.MonitorLanip
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>MonitorLanip</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="apname" class="control-label"></label>
+                <input asp-for="apname" class="form-control" />
+                <span asp-validation-for="apname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="bssid" class="control-label"></label>
+                <input asp-for="bssid" class="form-control" />
+                <span asp-validation-for="bssid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ip_addr_int" class="control-label"></label>
+                <input asp-for="ip_addr_int" class="form-control" />
+                <span asp-validation-for="ip_addr_int" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="downrate" class="control-label"></label>
+                <input asp-for="downrate" class="form-control" />
+                <span asp-validation-for="downrate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ppptype" class="control-label"></label>
+                <input asp-for="ppptype" class="form-control" />
+                <span asp-validation-for="ppptype" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="client_device" class="control-label"></label>
+                <input asp-for="client_device" class="form-control" />
+                <span asp-validation-for="client_device" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="uprate" class="control-label"></label>
+                <input asp-for="uprate" class="form-control" />
+                <span asp-validation-for="uprate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="mac" class="control-label"></label>
+                <input asp-for="mac" class="form-control" />
+                <span asp-validation-for="mac" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="reject" class="control-label"></label>
+                <input asp-for="reject" class="form-control" />
+                <span asp-validation-for="reject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="webid" class="control-label"></label>
+                <input asp-for="webid" class="form-control" />
+                <span asp-validation-for="webid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="total_up" class="control-label"></label>
+                <input asp-for="total_up" class="form-control" />
+                <span asp-validation-for="total_up" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="signal" class="control-label"></label>
+                <input asp-for="signal" class="form-control" />
+                <span asp-validation-for="signal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ac_gid" class="control-label"></label>
+                <input asp-for="ac_gid" class="form-control" />
+                <span asp-validation-for="ac_gid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="apmac" class="control-label"></label>
+                <input asp-for="apmac" class="form-control" />
+                <span asp-validation-for="apmac" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="connect_num" class="control-label"></label>
+                <input asp-for="connect_num" class="form-control" />
+                <span asp-validation-for="connect_num" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ssid" class="control-label"></label>
+                <input asp-for="ssid" class="form-control" />
+                <span asp-validation-for="ssid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="username" class="control-label"></label>
+                <input asp-for="username" class="form-control" />
+                <span asp-validation-for="username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="hostname" class="control-label"></label>
+                <input asp-for="hostname" class="form-control" />
+                <span asp-validation-for="hostname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="client_type" class="control-label"></label>
+                <input asp-for="client_type" class="form-control" />
+                <span asp-validation-for="client_type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="upload" class="control-label"></label>
+                <input asp-for="upload" class="form-control" />
+                <span asp-validation-for="upload" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="uptime" class="control-label"></label>
+                <input asp-for="uptime" class="form-control" />
+                <span asp-validation-for="uptime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="total_down" class="control-label"></label>
+                <input asp-for="total_down" class="form-control" />
+                <span asp-validation-for="total_down" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auth_type" class="control-label"></label>
+                <input asp-for="auth_type" class="form-control" />
+                <span asp-validation-for="auth_type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dtalk_name" class="control-label"></label>
+                <input asp-for="dtalk_name" class="form-control" />
+                <span asp-validation-for="dtalk_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="comment" class="control-label"></label>
+                <input asp-for="comment" class="form-control" />
+                <span asp-validation-for="comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="timestamp" class="control-label"></label>
+                <input asp-for="timestamp" class="form-control" />
+                <span asp-validation-for="timestamp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ip_addr" class="control-label"></label>
+                <input asp-for="ip_addr" class="form-control" />
+                <span asp-validation-for="ip_addr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="download" class="control-label"></label>
+                <input asp-for="download" class="form-control" />
+                <span asp-validation-for="download" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="frequencies" class="control-label"></label>
+                <input asp-for="frequencies" class="form-control" />
+                <span asp-validation-for="frequencies" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

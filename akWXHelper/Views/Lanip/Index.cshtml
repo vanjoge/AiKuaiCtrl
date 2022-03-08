@@ -1,0 +1,314 @@
+﻿@model IEnumerable<akWXHelper.Models.StatDayLanip>
+
+@{
+    ViewData["Title"] = "流量统计";
+}
+
+<div>
+    <h1>统计</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    IP
+                </th>
+                <th>
+                    总上传
+                </th>
+                <th>
+                    总下载
+                </th>
+                <th>
+                    日均带宽上行
+                </th>
+                <th>
+                    日均带宽下行
+                </th>
+                <th>
+                    20-22上行
+                </th>
+                <th>
+                    20-22下行
+                </th>
+                <th>
+                    20-22带宽上行
+                </th>
+                <th>
+                    20-22带宽下行
+                </th>
+                <th>
+                    18-24上行
+                </th>
+                <th>
+                    18-24下行
+                </th>
+                <th>
+                    18-24带宽上行
+                </th>
+                <th>
+                    18-24带宽下行
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                long sum_down = 0, sum_down2 = 0, sum_down3 = 0;
+                long sum_up = 0, sum_up2 = 0, sum_up3 = 0;
+                foreach (var item in Model)
+                {
+                    item.GetCHBytes(0, 24, out var total_down, out var total_up);
+                    item.GetCHBytes(20, 22, out var total_down2, out var total_up2);
+                    item.GetCHBytes(18, 24, out var total_down3, out var total_up3);
+                    sum_down += total_down;
+                    sum_down2 += total_down2;
+                    sum_down3 += total_down3;
+
+                    sum_up += total_up;
+                    sum_up2 += total_up2;
+                    sum_up3 += total_up3;
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Key)
+                        </td>
+                        <td>
+                            @MyTask.GetHSize(total_up)
+                        </td>
+                        <td>
+                            @MyTask.GetHSize(total_down)
+                        </td>
+                        <td>
+                            @MyTask.ToMbps(total_up / (24 * 3600D))
+                        </td>
+                        <td>
+                            @MyTask.ToMbps(total_down / (24 * 3600D))
+                        </td>
+                        <td>
+                            @MyTask.GetHSize(total_up2)
+                        </td>
+                        <td>
+                            @MyTask.GetHSize(total_down2)
+                        </td>
+                        <td>
+                            @MyTask.ToMbps(total_up2 / (2 * 3600D))
+                        </td>
+                        <td>
+                            @MyTask.ToMbps(total_down2 / (2 * 3600D))
+                        </td>
+                        <td>
+                            @MyTask.GetHSize(total_up3)
+                        </td>
+                        <td>
+                            @MyTask.GetHSize(total_down3)
+                        </td>
+                        <td>
+                            @MyTask.ToMbps(total_up3 / (6 * 3600D))
+                        </td>
+                        <td>
+                            @MyTask.ToMbps(total_down3 / (6 * 3600D))
+                        </td>
+                    </tr>
+                }
+                <tr style="font-weight:bold">
+                    <td>
+                        合计
+                    <td>
+                        @MyTask.GetHSize(sum_up)
+                    </td>
+                    <td>
+                        @MyTask.GetHSize(sum_down)
+                    </td>
+                    <td>
+                        @MyTask.ToMbps(sum_up / (24 * 3600D))
+                    </td>
+                    <td>
+                        @MyTask.ToMbps(sum_down / (24 * 3600D))
+                    </td>
+                    <td>
+                        @MyTask.GetHSize(sum_up2)
+                    </td>
+                    <td>
+                        @MyTask.GetHSize(sum_down2)
+                    </td>
+                    <td>
+                        @MyTask.ToMbps(sum_up2 / (2 * 3600D))
+                    </td>
+                    <td>
+                        @MyTask.ToMbps(sum_down2 / (2 * 3600D))
+                    </td>
+                    <td>
+                        @MyTask.GetHSize(sum_up3)
+                    </td>
+                    <td>
+                        @MyTask.GetHSize(sum_down3)
+                    </td>
+                    <td>
+                        @MyTask.ToMbps(sum_up3 / (6 * 3600D))
+                    </td>
+                    <td>
+                        @MyTask.ToMbps(sum_down3 / (6 * 3600D))
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h2>详细记录</h2>
+
+    <p>
+        @*<a asp-action="Create">Create New</a>*@
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    获取时间
+                </th>
+                <th>
+                    设备
+                </th>
+                <th>
+                    总上传
+                </th>
+                <th>
+                    总下载
+                </th>
+                <th>
+                    连接数
+                </th>
+                <th>
+                    上行速度
+                </th>
+                <th>
+                    下行速度
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pitem in Model)
+            {
+                @foreach (var item in pitem.Data)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GetTime)
+                        </td>
+                        <td>
+                            @Html.Raw(item.ip_addr + "(" + item.mac + ")")
+                        </td>
+                        <td>
+                            @MyTask.GetHSize(item.total_up)
+                        </td>
+                        <td>
+                            @MyTask.GetHSize(item.total_down)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.connect_num)
+                        </td>
+                        <td>
+                            @MyTask.ToMbps(item.upload)
+                        </td>
+                        <td>
+                            @MyTask.ToMbps(item.download)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.apname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.bssid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ip_addr_int)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.downrate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ppptype)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.client_device)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.uprate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.mac)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.reject)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.webid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.total_up)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.signal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ac_gid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.apmac)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.connect_num)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ssid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.username)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hostname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.client_type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.upload)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.uptime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.total_down)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.auth_type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.dtalk_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.comment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.timestamp)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ip_addr)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.download)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.frequencies)
+                            </td>*@
+                        <td>
+                            @*<a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>*@
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

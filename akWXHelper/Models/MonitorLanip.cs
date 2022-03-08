@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +9,15 @@ namespace akWXHelper.Models
 {
     public class MonitorLanip
     {
+        public MonitorLanip()
+        {
+            GetTime = DateTime.Now;
+        }
+        /// <summary>
+        /// 获取时间
+        /// </summary>
+        [Key, Column(Order = 0)]
+        public DateTime GetTime { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -14,6 +25,7 @@ namespace akWXHelper.Models
         /// <summary>
         /// 
         /// </summary>
+        [Key, Column(Order = 1)]
         public int id { get; set; }
         /// <summary>
         /// 
@@ -22,7 +34,7 @@ namespace akWXHelper.Models
         /// <summary>
         /// 
         /// </summary>
-        public int ip_addr_int { get; set; }
+        public long ip_addr_int { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -54,7 +66,7 @@ namespace akWXHelper.Models
         /// <summary>
         /// 
         /// </summary>
-        public int total_up { get; set; }
+        public long total_up { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -70,7 +82,7 @@ namespace akWXHelper.Models
         /// <summary>
         /// 
         /// </summary>
-        public int connect_num { get; set; }
+        public long connect_num { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -90,7 +102,7 @@ namespace akWXHelper.Models
         /// <summary>
         /// 
         /// </summary>
-        public int upload { get; set; }
+        public long upload { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -98,7 +110,7 @@ namespace akWXHelper.Models
         /// <summary>
         /// 
         /// </summary>
-        public int total_down { get; set; }
+        public long total_down { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -114,7 +126,7 @@ namespace akWXHelper.Models
         /// <summary>
         /// 
         /// </summary>
-        public int timestamp { get; set; }
+        public long timestamp { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -122,7 +134,7 @@ namespace akWXHelper.Models
         /// <summary>
         /// 
         /// </summary>
-        public int download { get; set; }
+        public long download { get; set; }
         /// <summary>
         /// 
         /// </summary>
